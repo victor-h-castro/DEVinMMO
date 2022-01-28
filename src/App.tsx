@@ -1,25 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable import/no-unresolved */
+import { Testing } from 'component/Testing';
+import { SettingsContext } from 'context/SettingContext';
+import React, { useContext } from 'react';
+import { ThemeProvider } from 'styled-components';
+import { MyGlobalStyle } from 'theme/GlobalStyles';
+import { dark, light } from 'theme/my-theme';
 
 function App() {
+  const theme = useContext(SettingsContext);
+  console.log(theme.themeMode);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <ThemeProvider theme={theme.themeMode === 'light' ? light : dark}>
+
+      <MyGlobalStyle />
+      <Testing />
+      <input />
+    </ThemeProvider>
   );
 }
 

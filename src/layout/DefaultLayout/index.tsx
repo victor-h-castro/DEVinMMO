@@ -1,4 +1,5 @@
 import { styled } from '@mui/material/styles';
+import { Outlet } from 'react-router-dom';
 
 const RootStyle = styled('div')({
   display: 'flex',
@@ -24,7 +25,11 @@ const MainStyle = styled('div')(({ theme }) => ({
 export default function DefaultLayout() {
   return (
     <RootStyle>
-      <MainStyle />
+      <MainStyle>
+        <Outlet />
+
+      </MainStyle>
+
     </RootStyle>
   );
 }

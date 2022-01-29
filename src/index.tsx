@@ -4,12 +4,18 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from 'reportWebVitals';
 import App from 'App';
 import { SettingsProvider } from 'context/SettingContext';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
     <SettingsProvider>
-      <App />
+      <BrowserRouter>
+
+        <App />
+      </BrowserRouter>
+
     </SettingsProvider>
+
   </React.StrictMode>,
   document.getElementById('root'),
 );

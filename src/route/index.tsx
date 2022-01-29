@@ -13,7 +13,6 @@ export default function Router() {
         { path: '/home', element: <Home /> },
         { path: '/home/news', element: <Home /> },
         { path: '/home/game/:id', element: <Home /> },
-
       ],
     },
 

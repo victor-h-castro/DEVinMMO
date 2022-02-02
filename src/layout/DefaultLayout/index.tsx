@@ -1,5 +1,8 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import { styled } from '@mui/material/styles';
 import { Outlet } from 'react-router-dom';
+import Header from './header';
 
 const RootStyle = styled('div')({
   display: 'flex',
@@ -27,7 +30,7 @@ export default function DefaultLayout() {
     <RootStyle>
       <MainStyle>
         <Outlet />
-
+        <Header />
       </MainStyle>
 
     </RootStyle>

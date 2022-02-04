@@ -56,6 +56,7 @@ export const Home = () => {
       return gameList?.filter((element) => element.title.toLowerCase().includes(state));
     });
   }, [state]);
+
   return (
     <Grid direction="row" spacing={5} container px={2} sx={{ marginTop: 1 }}>
       <Grid container item spacing={5} xs={12}>

@@ -28,7 +28,7 @@ export default function ImageCard({
   const navigate = useNavigate();
 
   const handleClick = (gameId: number): void => {
-    navigate(`/home/${gameId}`);
+    navigate(`/home/game/${gameId}`);
   };
 
   return (

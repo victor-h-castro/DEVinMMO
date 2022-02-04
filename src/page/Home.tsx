@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-unresolved */
@@ -6,6 +7,7 @@
 /* eslint-disable import/prefer-default-export */
 
 import { Container, Grid } from '@mui/material';
+import Carousel from 'component/Carousel';
 import ImageCard from 'component/ImageCard';
 import { SettingsContext } from 'context/SettingContext';
 import { useContext, useEffect, useState } from 'react';

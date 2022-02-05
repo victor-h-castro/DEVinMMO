@@ -17,16 +17,23 @@ import { GameListProps } from 'type/gameList';
 import { NewsListProps } from 'type/newsList';
 import { useParams } from 'react-router-dom';
 import { DescriptionCard } from 'component/DescriptionCard';
+import { FormGame } from 'component/FormGame';
+import { FormProps } from 'type/form';
 
 export const Game = () => {
   const { fetchGameListData, fetchNewsListData, fetchGameData } = useMmoService();
   const [loading, setLoading] = useState<boolean>(false);
+  const [comments, setComments] = useState<FormProps[]>([]);
 
   const [game, setGame] = useState<GameProps>();
   const [screenshots, setScreenshots] = useState<string[]>([]);
 
   const { state } = useContext(SettingsContext);
   const { gameId } = useParams();
+
+  const addComments = async (comment:FormProps) => {
+    setComments((prev) => [...prev, comment]);
+  };
 
   const fetchGame = async (id:string) => {
     setLoading(true);
@@ -41,7 +48,7 @@ export const Game = () => {
       await fetchGame(`${gameId}`);
     })();
   }, []);
-  console.log(game);
+  console.log(comments);
   return (
     <Container maxWidth="xl">
 
@@ -58,6 +65,10 @@ export const Game = () => {
 
         </Grid>
 
+        <Grid item xs={12}>
+          <FormGame setComments={addComments} />
+
+        </Grid>
       </Grid>
     </Container>
   );

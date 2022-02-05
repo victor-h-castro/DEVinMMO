@@ -16,12 +16,15 @@ import { GameProps } from 'type/game';
 import { GameListProps } from 'type/gameList';
 import { NewsListProps } from 'type/newsList';
 import { useParams } from 'react-router-dom';
+import { DescriptionCard } from 'component/DescriptionCard';
 
 export const Game = () => {
   const { fetchGameListData, fetchNewsListData, fetchGameData } = useMmoService();
   const [loading, setLoading] = useState<boolean>(false);
 
   const [game, setGame] = useState<GameProps>();
+  const [screenshots, setScreenshots] = useState<string[]>([]);
+
   const { state } = useContext(SettingsContext);
   const { gameId } = useParams();
 
@@ -29,6 +32,8 @@ export const Game = () => {
     setLoading(true);
     const gameData :GameProps = await fetchGameData(id);
     setGame(() => gameData);
+
+    setScreenshots(() => gameData.screenshots.map((element) => element.image));
     setLoading(() => true);
   };
   useEffect(() => {
@@ -38,6 +43,22 @@ export const Game = () => {
   }, []);
   console.log(game);
   return (
-    <Grid direction="row" spacing={5} container px={2} sx={{ marginTop: 1 }} />
+    <Container maxWidth="xl">
+
+      <Grid direction="row" spacing={5} container px={2} sx={{ marginTop: 1 }}>
+        <Grid item xs={12}>
+          <Carousel images={screenshots} />
+        </Grid>
+        <Grid item xs={12} md={8} alignItems="stretch">
+          <DescriptionCard requirements={game?.minimum_system_requirements} />
+
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <DescriptionCard displayName={game?.short_description} />
+
+        </Grid>
+
+      </Grid>
+    </Container>
   );
 };

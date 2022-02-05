@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-plusplus */
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
@@ -23,11 +25,18 @@ export const News = () => {
   const [gameListRender, setGameListRender] = useState<GameListProps[]>();
   const [newsList, setNewsList] = useState<NewsListProps[]>();
   const { state } = useContext(SettingsContext);
+  function shuffleArr(array: any[]) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const rand = Math.floor(Math.random() * (i + 1));
+      [array[i], array[rand]] = [array[rand], array[i]];
+    }
+  }
 
   const fetchNewsList = async () => {
     setLoading(true);
     const newsListData :NewsListProps[] = await fetchNewsListData();
     console.log(newsListData);
+    shuffleArr(newsListData);
     setNewsList(() => newsListData);
     setLoading(() => true);
   };

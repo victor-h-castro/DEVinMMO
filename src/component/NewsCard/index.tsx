@@ -54,7 +54,7 @@ export default function NewsCard({
           <Typography variant={matches ? 'h6' : 'h4'}>
             {title}
           </Typography>
-          <TypographyLongText variant={matches ? 'subtitle2' : 'subtitle1'}>
+          <TypographyLongText sx={{ filter: 'contrast(20%)' }} variant={matches ? 'subtitle2' : 'subtitle1'}>
             {description}
           </TypographyLongText>
         </CardContent>

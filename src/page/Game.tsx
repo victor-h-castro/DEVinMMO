@@ -21,14 +21,14 @@ export const Game = () => {
   const { fetchGameListData, fetchNewsListData, fetchGameData } = useMmoService();
   const [loading, setLoading] = useState<boolean>(false);
 
-  const [game, setGame] = useState<GameProps>();
+  const [game, setGame] = useState<string[]>([]);
   const { state } = useContext(SettingsContext);
   const { gameId } = useParams();
 
   const fetchGame = async (id:string) => {
     setLoading(true);
     const gameData :GameProps = await fetchGameData(id);
-    setGame(() => gameData);
+    setGame(() => gameData.screenshots.map((element) => element.image));
     setLoading(() => true);
   };
   useEffect(() => {
@@ -38,6 +38,10 @@ export const Game = () => {
   }, []);
   console.log(game);
   return (
-    <Grid direction="row" spacing={5} container px={2} sx={{ marginTop: 1 }} />
+    <Grid direction="row" spacing={5} container px={2} sx={{ marginTop: 1 }}>
+      <Grid item xs={12}>
+        <Carousel images={game} />
+      </Grid>
+    </Grid>
   );
 };

@@ -3,6 +3,7 @@ import DefaultLayout from 'layout/DefaultLayout';
 import { Home } from 'page/Home';
 import { Game } from 'page/Game';
 import { Navigate, useRoutes } from 'react-router-dom';
+import { News } from 'page/News';
 
 export default function Router() {
   return useRoutes([
@@ -12,7 +13,7 @@ export default function Router() {
       children: [
         { element: <Navigate to="/home" replace />, index: true },
         { path: '/home', element: <Home /> },
-        { path: '/home/news', element: <Home /> },
+        { path: '/home/news', element: <News /> },
         { path: '/home/game/:gameId', element: <Game /> },
       ],
     },

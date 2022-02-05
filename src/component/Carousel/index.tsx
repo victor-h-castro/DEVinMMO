@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable import/extensions */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-unresolved */
@@ -10,7 +11,10 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Image from './Image';
 
-export default function Carousel() {
+export type CarouselProps = {
+  images: string[],
+};
+export default function Carousel({ images } : CarouselProps) {
   return (
 
     <Slider
@@ -20,11 +24,10 @@ export default function Carousel() {
       dots
       infinite
     >
-      <Image src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png" />
-      <Image src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png" />
-      <Image src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png" />
-      <Image src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png" />
-      <Image src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png" />
+      { images.map((image, index) => (
+        <Image key={index} src={image} />
+
+      ))}
     </Slider>
 
   );

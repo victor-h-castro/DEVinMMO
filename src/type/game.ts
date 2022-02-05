@@ -26,5 +26,5 @@ export type GameProps = {
     release_date: string,
     profile_url: string,
     minimum_system_requirements: SystemRequiriments,
-    screenshoot: KeyPair[],
+    screenshots: KeyPair[],
 };

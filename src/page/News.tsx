@@ -9,6 +9,7 @@
 import { Container, Grid } from '@mui/material';
 import Carousel from 'component/Carousel';
 import ImageCard from 'component/ImageCard';
+import NewsCard from 'component/NewsCard';
 import { SettingsContext } from 'context/SettingContext';
 import { useContext, useEffect, useState } from 'react';
 import { useMmoService } from 'service/useMmoService';
@@ -16,58 +17,38 @@ import { GameProps } from 'type/game';
 import { GameListProps } from 'type/gameList';
 import { NewsListProps } from 'type/newsList';
 
-export const Home = () => {
-  const { fetchGameListData, fetchNewsListData, fetchGameData } = useMmoService();
+export const News = () => {
+  const { fetchNewsListData } = useMmoService();
   const [loading, setLoading] = useState<boolean>(false);
-  const [gameList, setGameList] = useState<GameListProps[]>();
   const [gameListRender, setGameListRender] = useState<GameListProps[]>();
   const [newsList, setNewsList] = useState<NewsListProps[]>();
-  const [game, setGame] = useState<GameProps>();
   const { state } = useContext(SettingsContext);
-
-  const fetchGameList = async () => {
-    setLoading(true);
-    const gameListData :GameListProps[] = await fetchGameListData();
-    setGameList(() => gameListData);
-    setGameListRender(() => gameListData);
-    setLoading(() => true);
-  };
 
   const fetchNewsList = async () => {
     setLoading(true);
     const newsListData :NewsListProps[] = await fetchNewsListData();
+    console.log(newsListData);
     setNewsList(() => newsListData);
     setLoading(() => true);
   };
-  const fetchGame = async (id:string) => {
-    setLoading(true);
-    const gameData :GameProps = await fetchGameData(id);
-    setGame(() => gameData);
-    setLoading(() => true);
-  };
+
   useEffect(() => {
     (async () => {
-      await fetchGameList();
-      await fetchGameData('2');
+      await fetchNewsList();
     })();
   }, []);
-  useEffect(() => {
-    setGameListRender((previous) => {
-      return gameList?.filter((element) => element.title.toLowerCase().includes(state));
-    });
-  }, [state]);
-  console.log(gameListRender);
+
   return (
-    <Grid direction="row" spacing={5} container px={2} sx={{ marginTop: 1 }}>
-      <Grid container item spacing={5} xs={12}>
-        {gameListRender?.map(({
-          id, title, thumbnail, short_description,
+    <Grid direction="row" justifyContent="center" spacing={2} container px={2} sx={{ marginTop: 1 }}>
+      <Grid justifyContent="center" container item spacing={2} xs={12} sm={10}>
+        {newsList?.filter((element) => element.title.toLowerCase().includes(state))?.map(({
+          article_url, title, main_image, short_description,
         }) => (
-          <Grid item xs={12} md={6} lg={4}>
-            <ImageCard
-              id={id}
+          <Grid item xs={10} lg={7}>
+            <NewsCard
+              externalUrl={article_url}
               title={title}
-              thumbnail={thumbnail}
+              thumbnail={main_image}
               description={short_description}
             />
           </Grid>

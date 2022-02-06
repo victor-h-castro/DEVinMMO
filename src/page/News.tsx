@@ -11,6 +11,7 @@
 import { Container, Grid } from '@mui/material';
 import Carousel from 'component/Carousel';
 import ImageCard from 'component/ImageCard';
+import { Loading } from 'component/Loading';
 import NewsCard from 'component/NewsCard';
 import { SettingsContext } from 'context/SettingContext';
 import { useContext, useEffect, useState } from 'react';
@@ -33,11 +34,15 @@ export const News = () => {
   }
 
   const fetchNewsList = async () => {
-    setLoading(true);
-    const newsListData :NewsListProps[] = await fetchNewsListData();
-    shuffleArr(newsListData);
-    setNewsList(() => newsListData);
-    setLoading(() => true);
+    try {
+      setLoading(() => true);
+      const newsListData :NewsListProps[] = await fetchNewsListData();
+      shuffleArr(newsListData);
+      setNewsList(() => newsListData);
+      setLoading(() => false);
+    } catch {
+      setLoading(() => false);
+    }
   };
 
   useEffect(() => {
@@ -50,21 +55,24 @@ export const News = () => {
   }, []);
 
   return (
-    <Grid direction="row" justifyContent="center" spacing={2} container px={2} sx={{ marginTop: 1 }}>
-      <Grid justifyContent="center" container item spacing={2} xs={12} sm={10}>
-        {newsList?.filter((element) => element.title.toLowerCase().includes(state))?.map(({
-          article_url, title, main_image, short_description,
-        }) => (
-          <Grid item xs={10} lg={7}>
-            <NewsCard
-              externalUrl={article_url}
-              title={title}
-              thumbnail={main_image}
-              description={short_description}
-            />
-          </Grid>
-        )) }
+    <Loading loading={loading}>
+
+      <Grid direction="row" justifyContent="center" spacing={2} container px={2} sx={{ marginTop: 1 }}>
+        <Grid justifyContent="center" container item spacing={2} xs={12} sm={10}>
+          {newsList?.filter((element) => element.title.toLowerCase().includes(state))?.map(({
+            article_url, title, main_image, short_description,
+          }) => (
+            <Grid item xs={10} lg={7}>
+              <NewsCard
+                externalUrl={article_url}
+                title={title}
+                thumbnail={main_image}
+                description={short_description}
+              />
+            </Grid>
+          )) }
+        </Grid>
       </Grid>
-    </Grid>
+    </Loading>
   );
 };

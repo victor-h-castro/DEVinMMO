@@ -19,12 +19,13 @@ import { FormProps } from 'type/form';
 import { StorageProps } from 'type/storage';
 import useStorage from 'hook/useStorage';
 import Comments from 'component/Comments';
+import { Loading } from 'component/Loading';
 
 export const Game = () => {
   const StorageSchema: StorageProps[] = [];
   const [commentsFromStorage, setCommentsFromStorage] = useStorage<StorageProps[]>('DevInMMO1468574651685746', StorageSchema);
   const { fetchGameData } = useMmoService();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [comments, setComments] = useState<FormProps | null>(null);
   const [renderComments, setRenderComments] = useState<StorageProps[]>([]);
 
@@ -38,12 +39,16 @@ export const Game = () => {
   };
 
   const fetchGame = async (id:string) => {
-    setLoading(true);
-    const gameData :GameProps = await fetchGameData(id);
-    setGame(() => gameData);
+    try {
+      setLoading(true);
+      const gameData :GameProps = await fetchGameData(id);
+      setGame(() => gameData);
 
-    setScreenshots(() => gameData.screenshots.map((element) => element.image));
-    setLoading(() => true);
+      setScreenshots(() => gameData.screenshots.map((element) => element.image));
+      setLoading(() => false);
+    } catch {
+      setLoading(() => false);
+    }
   };
 
   const handleUpVote = async (id: number) => {
@@ -85,34 +90,36 @@ export const Game = () => {
     }
   }, [comments]);
   return (
-    <Container maxWidth="xl">
+    <Loading loading={loading}>
+      <Container maxWidth="xl">
 
-      <Grid direction="row" spacing={5} container px={2} sx={{ marginTop: 1 }}>
-        <Grid item xs={12}>
-          <Carousel images={screenshots} />
+        <Grid direction="row" spacing={5} container px={2} sx={{ marginTop: 1 }}>
+          <Grid item xs={12}>
+            <Carousel images={screenshots} />
+          </Grid>
+          <Grid item xs={12} md={8} alignItems="stretch">
+            <DescriptionCard requirements={game?.minimum_system_requirements} />
+
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <DescriptionCard displayName={game?.short_description} />
+
+          </Grid>
+
+          <Grid item xs={12}>
+            <FormGame setComments={addComments} />
+
+          </Grid>
+          {renderComments.length > 0 && (
+          <Grid item xs={12} md={12} alignItems="stretch">
+            <Card sx={{ p: 3, mb: 3 }}>
+              { renderComments.map((comment) => <Comments addVote={handleUpVote} subVote={handleDownVote} comment={comment} />) }
+
+            </Card>
+          </Grid>
+          )}
         </Grid>
-        <Grid item xs={12} md={8} alignItems="stretch">
-          <DescriptionCard requirements={game?.minimum_system_requirements} />
-
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <DescriptionCard displayName={game?.short_description} />
-
-        </Grid>
-
-        <Grid item xs={12}>
-          <FormGame setComments={addComments} />
-
-        </Grid>
-        {renderComments.length > 0 && (
-        <Grid item xs={12} md={12} alignItems="stretch">
-          <Card sx={{ p: 3, mb: 3 }}>
-            { renderComments.map((comment) => <Comments addVote={handleUpVote} subVote={handleDownVote} comment={comment} />) }
-
-          </Card>
-        </Grid>
-        )}
-      </Grid>
-    </Container>
+      </Container>
+    </Loading>
   );
 };

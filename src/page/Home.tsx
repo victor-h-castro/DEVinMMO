@@ -6,9 +6,9 @@
 /* eslint-disable react/function-component-definition */
 /* eslint-disable import/prefer-default-export */
 
-import { Container, Grid } from '@mui/material';
-import Carousel from 'component/Carousel';
+import { Grid } from '@mui/material';
 import ImageCard from 'component/ImageCard';
+import { Loading } from 'component/Loading';
 import { SettingsContext } from 'context/SettingContext';
 import { useContext, useEffect, useState } from 'react';
 import { useMmoService } from 'service/useMmoService';
@@ -18,16 +18,20 @@ import { NewsListProps } from 'type/newsList';
 
 export const Home = () => {
   const { fetchGameListData } = useMmoService();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [gameList, setGameList] = useState<GameListProps[]>();
   const [game, setGame] = useState<GameProps>();
   const { state, setState } = useContext(SettingsContext);
 
   const fetchGameList = async () => {
-    setLoading(true);
-    const gameListData :GameListProps[] = await fetchGameListData();
-    setGameList(() => gameListData);
-    setLoading(() => true);
+    try {
+      setLoading(() => true);
+      const gameListData :GameListProps[] = await fetchGameListData();
+      setGameList(() => gameListData);
+      setLoading(() => false);
+    } catch {
+      setLoading(() => false);
+    }
   };
 
   useEffect(() => {
@@ -40,21 +44,23 @@ export const Home = () => {
   }, []);
 
   return (
-    <Grid direction="row" spacing={5} container px={2} sx={{ marginTop: 1 }}>
-      <Grid container item spacing={5} xs={12}>
-        {gameList?.filter((element) => element.title.toLowerCase().includes(state))?.map(({
-          id, title, thumbnail, short_description,
-        }) => (
-          <Grid item xs={12} md={6} lg={4}>
-            <ImageCard
-              id={id}
-              title={title}
-              thumbnail={thumbnail}
-              description={short_description}
-            />
-          </Grid>
-        )) }
+    <Loading loading={loading}>
+      <Grid direction="row" spacing={5} container px={2} sx={{ marginTop: 1 }}>
+        <Grid container item spacing={5} xs={12}>
+          {gameList?.filter((element) => element.title.toLowerCase().includes(state))?.map(({
+            id, title, thumbnail, short_description,
+          }) => (
+            <Grid item xs={12} md={6} lg={4}>
+              <ImageCard
+                id={id}
+                title={title}
+                thumbnail={thumbnail}
+                description={short_description}
+              />
+            </Grid>
+          )) }
+        </Grid>
       </Grid>
-    </Grid>
+    </Loading>
   );
 };

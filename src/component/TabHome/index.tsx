@@ -1,13 +1,16 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
+// @mui
 import { SyntheticEvent, useEffect, useState } from 'react';
+
 import {
+  styled,
   Tab,
 } from '@mui/material';
 import { TabContext, TabList } from '@mui/lab';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const Tabs = [
+const SIMPLE_TAB = [
   {
     value: '1',
     label: 'Home',
@@ -18,15 +21,24 @@ const Tabs = [
     value: '2',
     label: 'News',
     disabled: false,
-    navigation: '/news',
+    navigation: '/home/news',
   },
   {
     value: '3',
     label: 'Random',
     disabled: false,
-    navigation: '/game/1',
+    navigation: '/home/game/1',
   },
 ];
+
+const TabStyled = styled(Tab)(({ theme }) => ({
+
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '10px',
+    minWidth: '0px !important',
+
+  },
+}));
 
 export function TabHome() {
   const { pathname } = useLocation();
@@ -41,14 +53,14 @@ export function TabHome() {
     setValue(newValue);
   };
   useEffect(() => {
-    const tabValue = path();
-    setValue(tabValue);
+    const teste = path();
+    setValue(teste);
   }, []);
   return (
     <TabContext value={value}>
       <TabList indicatorColor="secondary" onChange={handleChange}>
-        {Tabs.map((tab) => (
-          <Tab
+        {SIMPLE_TAB.map((tab) => (
+          <TabStyled
             key={tab.value}
             label={tab.label}
             value={tab.value}

@@ -2,12 +2,13 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable import/no-unresolved */
 import { ReactNode, createContext, useState } from 'react';
-import { ContextProps } from 'type/theme';
+import { ContextProps, ThemeMode } from 'type/theme';
 
 const initialState: ContextProps = {
   themeMode: 'light',
   state: '',
   setState: (statee: any) => { },
+  setThemeMode: (statee: any) => { },
 };
 
 const SettingsContext = createContext(initialState);
@@ -18,9 +19,12 @@ type SettingsProviderProps = {
 
 function SettingsProvider({ children }: SettingsProviderProps) {
   const [state, setState] = useState('');
+  const [themeMode, setThemeMode] = useState<ThemeMode>('light');
   return (
     <SettingsContext.Provider
-      value={{ ...initialState, state, setState }}
+      value={{
+        themeMode, setThemeMode, state, setState,
+      }}
     >
       {children}
     </SettingsContext.Provider>

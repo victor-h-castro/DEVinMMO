@@ -17,11 +17,9 @@ import { GameListProps } from 'type/gameList';
 import { NewsListProps } from 'type/newsList';
 
 export const Home = () => {
-  const { fetchGameListData, fetchNewsListData, fetchGameData } = useMmoService();
+  const { fetchGameListData } = useMmoService();
   const [loading, setLoading] = useState<boolean>(false);
   const [gameList, setGameList] = useState<GameListProps[]>();
-  const [gameListRender, setGameListRender] = useState<GameListProps[]>();
-  const [newsList, setNewsList] = useState<NewsListProps[]>();
   const [game, setGame] = useState<GameProps>();
   const { state } = useContext(SettingsContext);
 
@@ -29,38 +27,19 @@ export const Home = () => {
     setLoading(true);
     const gameListData :GameListProps[] = await fetchGameListData();
     setGameList(() => gameListData);
-    setGameListRender(() => gameListData);
     setLoading(() => true);
   };
 
-  const fetchNewsList = async () => {
-    setLoading(true);
-    const newsListData :NewsListProps[] = await fetchNewsListData();
-    setNewsList(() => newsListData);
-    setLoading(() => true);
-  };
-  const fetchGame = async (id:string) => {
-    setLoading(true);
-    const gameData :GameProps = await fetchGameData(id);
-    setGame(() => gameData);
-    setLoading(() => true);
-  };
   useEffect(() => {
     (async () => {
       await fetchGameList();
-      await fetchGameData('2');
     })();
   }, []);
-  useEffect(() => {
-    setGameListRender((previous) => {
-      return gameList?.filter((element) => element.title.toLowerCase().includes(state));
-    });
-  }, [state]);
-  console.log(gameListRender);
+
   return (
     <Grid direction="row" spacing={5} container px={2} sx={{ marginTop: 1 }}>
       <Grid container item spacing={5} xs={12}>
-        {gameListRender?.map(({
+        {gameList?.filter((element) => element.title.toLowerCase().includes(state))?.map(({
           id, title, thumbnail, short_description,
         }) => (
           <Grid item xs={12} md={6} lg={4}>

@@ -1,4 +1,9 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable import/no-unresolved */
 import { styled, Switch } from '@mui/material';
+import { SettingsContext } from 'context/SettingContext';
+import { useContext } from 'react';
+import { ThemeMode } from 'type/theme';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -48,7 +53,11 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 export default function ThemeSwitch() {
+  const { themeMode, setThemeMode } = useContext(SettingsContext);
+  const handleChangeMode = (mode: ThemeMode) => {
+    mode === 'dark' ? setThemeMode('light') : setThemeMode('dark');
+  };
   return (
-    <MaterialUISwitch sx={{ m: 1 }} />
+    <MaterialUISwitch checked={themeMode === 'dark'} onChange={() => handleChangeMode(themeMode)} sx={{ m: 1 }} />
   );
 }

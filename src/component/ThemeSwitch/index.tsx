@@ -6,7 +6,7 @@ import { SettingsContext } from 'context/SettingContext';
 import { useContext } from 'react';
 import { ThemeMode } from 'type/theme';
 
-const ThemedSwitch = styled(Switch)(({ theme }) => ({
+const ThemedSwitchStyle = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
   padding: 7,
@@ -59,6 +59,6 @@ export default function ThemeSwitch() {
     mode === 'dark' ? setThemeMode('light') : setThemeMode('dark');
   };
   return (
-    <ThemedSwitch checked={themeMode === 'dark'} onChange={() => handleChangeMode(themeMode)} sx={{ m: 1 }} />
+    <ThemedSwitchStyle checked={themeMode === 'dark'} onChange={() => handleChangeMode(themeMode)} sx={{ m: 1 }} />
   );
 }

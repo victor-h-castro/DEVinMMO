@@ -1,8 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
-// @mui
 import { SyntheticEvent, useEffect, useState } from 'react';
-
 import {
   Tab,
 } from '@mui/material';

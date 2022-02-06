@@ -14,16 +14,14 @@ const MainStyle = styled('div')(({ theme }) => ({
   flexGrow: 1,
   overflow: 'auto',
   minHeight: '100%',
-  paddingTop: 88,
-  paddingBottom: theme.spacing(10),
+  paddingTop: 64,
+  paddingBottom: '40px',
   [theme.breakpoints.up('lg')]: {
-    paddingTop: 116,
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
+    paddingTop: 128,
+    paddingLeft: '18px',
+    paddingRight: '18px',
   },
 }));
-
-// ----------------------------------------------------------------------
 
 export default function DefaultLayout() {
   return (

@@ -28,10 +28,8 @@ export const Game = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [comments, setComments] = useState<FormProps | null>(null);
   const [renderComments, setRenderComments] = useState<StorageProps[]>([]);
-
   const [game, setGame] = useState<GameProps>();
   const [screenshots, setScreenshots] = useState<string[]>([]);
-
   const { gameId } = useParams();
 
   const addComments = async (comment:FormProps) => {
@@ -60,6 +58,7 @@ export const Game = () => {
     const idComments = commentsArray.filter((element : StorageProps) => !!gameId && element.id === +gameId);
     setRenderComments(idComments);
   };
+
   const handleDownVote = async (id: number) => {
     const commentsArray = [...commentsFromStorage];
     const commentId = commentsFromStorage.find((element:StorageProps) => element.position === id);
@@ -69,6 +68,7 @@ export const Game = () => {
     const idComments = commentsArray.filter((element : StorageProps) => !!gameId && element.id === +gameId);
     setRenderComments(idComments);
   };
+
   useEffect(() => {
     (async () => {
       await fetchGame(`${gameId}`);
@@ -76,6 +76,7 @@ export const Game = () => {
     const idComments = commentsFromStorage.filter((element : StorageProps) => !!gameId && element.id === +gameId);
     setRenderComments(idComments);
   }, []);
+
   useEffect(() => {
     if (comments && !!gameId) {
       const commentToStorage :StorageProps = {

@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/jsx-props-no-spreading */
-// inspiração https://mui.com/pt/api/icon-button/ e https://mui.com/components/buttons/
+// https://mui.com/pt/api/icon-button/ e https://mui.com/components/buttons/
 import { forwardRef, ReactNode } from 'react';
 import { Box, IconButton, IconButtonProps } from '@mui/material';
 import { motion } from 'framer-motion';

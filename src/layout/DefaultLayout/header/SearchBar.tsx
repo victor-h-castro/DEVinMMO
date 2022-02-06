@@ -1,6 +1,5 @@
 /* eslint-disable import/no-unresolved */
 import { useContext, useState } from 'react';
-// @mui
 import { styled } from '@mui/material/styles';
 import {
   Input, Slide, InputAdornment, ClickAwayListener,

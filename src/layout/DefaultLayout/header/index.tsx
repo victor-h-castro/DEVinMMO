@@ -8,7 +8,6 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Searchbar from './SearchBar';
 
-// ----------------------------------------------------------------------
 const AppBarStyled = styled(AppBar)`
 background-color: #FFF
 `;

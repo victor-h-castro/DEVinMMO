@@ -2,9 +2,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/jsx-props-no-spreading */
-import { forwardRef, ReactNode, useState } from 'react';
+// https://mui.com/pt/api/icon-button/ e https://mui.com/components/buttons/
+import { forwardRef, ReactNode } from 'react';
 import { Box, IconButton, IconButtonProps } from '@mui/material';
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const ButtonAnimated = forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ children, ...other }, ref) => (
@@ -18,8 +19,6 @@ const ButtonAnimated = forwardRef<HTMLButtonElement, IconButtonProps>(
 );
 
 export default ButtonAnimated;
-
-// ----------------------------------------------------------------------
 
 type AnimationWrapperProp = {
   children: ReactNode;

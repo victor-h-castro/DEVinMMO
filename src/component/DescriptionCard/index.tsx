@@ -5,17 +5,13 @@
 import { styled } from '@mui/material/styles';
 import { Typography, Card, CardContent } from '@mui/material';
 
-// ----------------------------------------------------------------------
-
 const RootStyle = styled(Card)(() => ({
-  // boxShadow: 'none',
   backgroundColor: '#42a5f560',
   color: '#212b36',
   borderRadius: '16px',
   height: '100%',
 }));
 
-// ----------------------------------------------------------------------
 type requirementsProps = {
     graphics: string,
     memory:string,

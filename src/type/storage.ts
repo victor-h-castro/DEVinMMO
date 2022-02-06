@@ -3,4 +3,5 @@ export type StorageProps = {
     user: string,
     comment: string,
     votes:number,
+    position:number,
   };

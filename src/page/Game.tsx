@@ -50,6 +50,29 @@ export const Game = () => {
     setScreenshots(() => gameData.screenshots.map((element) => element.image));
     setLoading(() => true);
   };
+
+  const handleUpVote = async (id: number) => {
+    const commentsArray = [...commentsFromStorage];
+    const commentId = commentsFromStorage.find((element:StorageProps) => element.position === id);
+    commentId.votes += 1;
+    commentsArray[id] = commentId;
+    console.log(commentId.votes);
+    console.log(commentId);
+    setCommentsFromStorage([...commentsArray]);
+    const idComments = commentsArray.filter((element : StorageProps) => !!gameId && element.id === +gameId);
+    setRenderComments(idComments);
+  };
+  const handleDownVote = async (id: number) => {
+    const commentsArray = [...commentsFromStorage];
+    const commentId = commentsFromStorage.find((element:StorageProps) => element.position === id);
+    commentId.votes -= 1;
+    commentsArray[id] = commentId;
+    console.log(commentId.votes);
+    console.log(commentId);
+    setCommentsFromStorage([...commentsArray]);
+    const idComments = commentsArray.filter((element : StorageProps) => !!gameId && element.id === +gameId);
+    setRenderComments(idComments);
+  };
   useEffect(() => {
     (async () => {
       await fetchGame(`${gameId}`);
@@ -64,6 +87,7 @@ export const Game = () => {
         user: comments?.fullName ?? '',
         comment: comments?.comment ?? '',
         votes: 0,
+        position: commentsFromStorage.length,
       };
       setCommentsFromStorage([...commentsFromStorage, commentToStorage]);
       setRenderComments([...renderComments, commentToStorage]);
@@ -93,7 +117,7 @@ export const Game = () => {
         {renderComments.length > 0 && (
         <Grid item xs={12} md={12} alignItems="stretch">
           <Card sx={{ p: 3, mb: 3 }}>
-            { renderComments.map((comment) => <Comments comment={comment} />) }
+            { renderComments.map((comment) => <Comments addVote={handleUpVote} subVote={handleDownVote} comment={comment} />) }
 
           </Card>
         </Grid>

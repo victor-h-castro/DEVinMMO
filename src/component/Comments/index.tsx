@@ -1,18 +1,20 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-unresolved */
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
-import Typography from '@mui/material/Typography';
 import { StorageProps } from 'type/storage';
-import { Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import Iconify from 'component/Iconify';
 
 type CommentsProps = {
     comment: StorageProps,
+    addVote: (id:number) => void,
+    subVote: (id:number) => void,
     }
 
-export default function Comments({ comment } : CommentsProps) {
+export default function Comments({ comment, addVote, subVote } : CommentsProps) {
   return (
 
     <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
@@ -20,27 +22,24 @@ export default function Comments({ comment } : CommentsProps) {
 
         <ListItemText
           primary={comment.user}
-          secondary={(
-            <>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body2"
-                color="text.primary"
-              >
-                Ali Connors
-              </Typography>
-              {comment.comment}
-            </>
-          )}
+          secondary={comment.comment}
         />
         <Stack direction="column" sx={{ position: 'absolute', right: 0 }}>
           <Iconify
+            onClick={() => addVote(comment.position)}
             icon="ant-design:caret-up-outlined"
             sx={{ width: 24, height: 24 }}
           />
+          <Typography
+            sx={{ display: 'inline', textAlign: 'center', color: comment.votes > 0 ? 'green' : 'red' }}
+            component="span"
+            variant="body2"
+            color="text.primary"
+          >
+            {comment.votes !== 0 && comment.votes}
+          </Typography>
           <Iconify
-            onClick={() => console.log('teste')}
+            onClick={() => subVote(comment.position)}
             icon="ant-design:caret-down-outlined"
             sx={{ width: 24, height: 24 }}
           />

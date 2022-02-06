@@ -21,7 +21,7 @@ export const Home = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [gameList, setGameList] = useState<GameListProps[]>();
   const [game, setGame] = useState<GameProps>();
-  const { state } = useContext(SettingsContext);
+  const { state, setState } = useContext(SettingsContext);
 
   const fetchGameList = async () => {
     setLoading(true);
@@ -34,6 +34,9 @@ export const Home = () => {
     (async () => {
       await fetchGameList();
     })();
+    return () => {
+      setState('');
+    };
   }, []);
 
   return (

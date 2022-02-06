@@ -38,8 +38,7 @@ export default function Searchbar() {
   const handleClose = () => {
     setIsOpen(false);
   };
-  const { setState, state } = useContext(SettingsContext);
-  console.log(state);
+  const { setState } = useContext(SettingsContext);
   return (
     <ClickAwayListener onClickAway={handleClose}>
       <div>

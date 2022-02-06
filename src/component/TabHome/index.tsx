@@ -24,9 +24,9 @@ const SIMPLE_TAB = [
   },
   {
     value: '3',
-    label: 'Surprise Me',
+    label: 'Random',
     disabled: false,
-    navigation: '/home/game/1',
+    navigation: '/game/1',
   },
 ];
 

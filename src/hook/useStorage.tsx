@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
 
-// ----------------------------------------------------------------------
-
 export default function useStorage<Generic>(key: string, defaultSchema: Generic) {
   const [value, setValue] = useState(() => {
     const storagedData = localStorage.getItem(key);
@@ -10,7 +8,7 @@ export default function useStorage<Generic>(key: string, defaultSchema: Generic)
   });
 
   const setValueToStorage = (newValue: Generic) => {
-    setValue((currentValue: any) => {
+    setValue((prev: any) => {
       localStorage.setItem(key, JSON.stringify(newValue));
       return newValue;
     });

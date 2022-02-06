@@ -9,13 +9,9 @@
 
 import { Card, Container, Grid } from '@mui/material';
 import Carousel from 'component/Carousel';
-import ImageCard from 'component/ImageCard';
-import { SettingsContext } from 'context/SettingContext';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMmoService } from 'service/useMmoService';
 import { GameProps } from 'type/game';
-import { GameListProps } from 'type/gameList';
-import { NewsListProps } from 'type/newsList';
 import { useParams } from 'react-router-dom';
 import { DescriptionCard } from 'component/DescriptionCard';
 import { FormGame } from 'component/FormGame';
@@ -26,8 +22,8 @@ import Comments from 'component/Comments';
 
 export const Game = () => {
   const StorageSchema: StorageProps[] = [];
-  const [commentsFromStorage, setCommentsFromStorage] = useStorage<StorageProps[]>('DevInMMO', StorageSchema);
-  const { fetchGameListData, fetchNewsListData, fetchGameData } = useMmoService();
+  const [commentsFromStorage, setCommentsFromStorage] = useStorage<StorageProps[]>('DevInMMO1468574651685746', StorageSchema);
+  const { fetchGameData } = useMmoService();
   const [loading, setLoading] = useState<boolean>(false);
   const [comments, setComments] = useState<FormProps | null>(null);
   const [renderComments, setRenderComments] = useState<StorageProps[]>([]);
@@ -35,7 +31,6 @@ export const Game = () => {
   const [game, setGame] = useState<GameProps>();
   const [screenshots, setScreenshots] = useState<string[]>([]);
 
-  const { state } = useContext(SettingsContext);
   const { gameId } = useParams();
 
   const addComments = async (comment:FormProps) => {
@@ -56,8 +51,6 @@ export const Game = () => {
     const commentId = commentsFromStorage.find((element:StorageProps) => element.position === id);
     commentId.votes += 1;
     commentsArray[id] = commentId;
-    console.log(commentId.votes);
-    console.log(commentId);
     setCommentsFromStorage([...commentsArray]);
     const idComments = commentsArray.filter((element : StorageProps) => !!gameId && element.id === +gameId);
     setRenderComments(idComments);
@@ -67,8 +60,6 @@ export const Game = () => {
     const commentId = commentsFromStorage.find((element:StorageProps) => element.position === id);
     commentId.votes -= 1;
     commentsArray[id] = commentId;
-    console.log(commentId.votes);
-    console.log(commentId);
     setCommentsFromStorage([...commentsArray]);
     const idComments = commentsArray.filter((element : StorageProps) => !!gameId && element.id === +gameId);
     setRenderComments(idComments);
@@ -93,7 +84,6 @@ export const Game = () => {
       setRenderComments([...renderComments, commentToStorage]);
     }
   }, [comments]);
-  console.log(renderComments);
   return (
     <Container maxWidth="xl">
 

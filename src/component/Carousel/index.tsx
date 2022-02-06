@@ -23,6 +23,8 @@ export default function Carousel({ images } : CarouselProps) {
       focusOnSelect
       dots
       infinite
+      autoplay
+      autoplaySpeed={5000}
     >
       { images.map((image, index) => (
         <Image key={index} src={image} />

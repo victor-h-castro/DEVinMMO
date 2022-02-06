@@ -9,8 +9,6 @@ import Iconify from 'component/Iconify';
 import ButtonAnimated from 'component/ButtonAnimated';
 import { SettingsContext } from 'context/SettingContext';
 
-// ----------------------------------------------------------------------
-
 const SearchbarStyled = styled('div')({
   width: '100%',
   position: 'absolute',
@@ -26,8 +24,6 @@ const SearchbarStyled = styled('div')({
   backdropFilter: 'blur(6px)',
 });
 
-// ----------------------------------------------------------------------
-
 export default function Searchbar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -41,7 +37,7 @@ export default function Searchbar() {
   const { setState } = useContext(SettingsContext);
   return (
     <ClickAwayListener onClickAway={handleClose}>
-      <div>
+      <>
         <Slide direction="down" in={isOpen} mountOnEnter unmountOnExit>
           <SearchbarStyled>
             <Input
@@ -53,7 +49,7 @@ export default function Searchbar() {
                 <InputAdornment position="start">
                   <Iconify
                     icon="eva:search-fill"
-                    sx={{ width: 24, height: 24 }}
+                    sx={{ width: 32, height: 32 }}
                   />
                 </InputAdornment>
               )}
@@ -63,10 +59,10 @@ export default function Searchbar() {
         </Slide>
         {!isOpen && (
           <ButtonAnimated onClick={handleOpen}>
-            <Iconify icon="eva:search-fill" width={24} height={24} />
+            <Iconify icon="eva:search-fill" width={32} height={32} />
           </ButtonAnimated>
         )}
-      </div>
+      </>
     </ClickAwayListener>
   );
 }

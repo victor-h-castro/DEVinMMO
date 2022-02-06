@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
-
-import { useEffect, useState } from 'react';
+// @mui
+import { SyntheticEvent, useEffect, useState } from 'react';
 
 import {
   Tab,
@@ -9,7 +9,7 @@ import {
 import { TabContext, TabList } from '@mui/lab';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const TABS = [
+const Tabs = [
   {
     value: '1',
     label: 'Home',
@@ -20,7 +20,7 @@ const TABS = [
     value: '2',
     label: 'News',
     disabled: false,
-    navigation: '/home/news',
+    navigation: '/news',
   },
   {
     value: '3',
@@ -39,17 +39,17 @@ export function TabHome() {
     return '1';
   };
   const [value, setValue] = useState('');
-  const handleChange = (newValue: string) => {
+  const handleChange = (event: SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
   useEffect(() => {
-    const routeValue = path();
-    setValue(routeValue);
+    const tabValue = path();
+    setValue(tabValue);
   }, []);
   return (
     <TabContext value={value}>
-      <TabList indicatorColor="secondary" onChange={() => handleChange}>
-        {TABS.map((tab) => (
+      <TabList indicatorColor="secondary" onChange={handleChange}>
+        {Tabs.map((tab) => (
           <Tab
             key={tab.value}
             label={tab.label}

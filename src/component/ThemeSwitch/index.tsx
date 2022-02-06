@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable import/no-unresolved */
+// https://mui.com/pt/components/switches/
 import { styled, Switch } from '@mui/material';
 import { SettingsContext } from 'context/SettingContext';
 import { useContext } from 'react';
 import { ThemeMode } from 'type/theme';
 
-const MaterialUISwitch = styled(Switch)(({ theme }) => ({
+const ThemedSwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
   padding: 7,
@@ -58,6 +59,6 @@ export default function ThemeSwitch() {
     mode === 'dark' ? setThemeMode('light') : setThemeMode('dark');
   };
   return (
-    <MaterialUISwitch checked={themeMode === 'dark'} onChange={() => handleChangeMode(themeMode)} sx={{ m: 1 }} />
+    <ThemedSwitch checked={themeMode === 'dark'} onChange={() => handleChangeMode(themeMode)} sx={{ m: 1 }} />
   );
 }

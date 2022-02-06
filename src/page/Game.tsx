@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
@@ -6,7 +7,7 @@
 /* eslint-disable react/function-component-definition */
 /* eslint-disable import/prefer-default-export */
 
-import { Container, Grid } from '@mui/material';
+import { Card, Container, Grid } from '@mui/material';
 import Carousel from 'component/Carousel';
 import ImageCard from 'component/ImageCard';
 import { SettingsContext } from 'context/SettingContext';
@@ -19,11 +20,17 @@ import { useParams } from 'react-router-dom';
 import { DescriptionCard } from 'component/DescriptionCard';
 import { FormGame } from 'component/FormGame';
 import { FormProps } from 'type/form';
+import { StorageProps } from 'type/storage';
+import useStorage from 'hook/useStorage';
+import Comments from 'component/Comments';
 
 export const Game = () => {
+  const StorageSchema: StorageProps[] = [];
+  const [commentsFromStorage, setCommentsFromStorage] = useStorage<StorageProps[]>('DevInMMO', StorageSchema);
   const { fetchGameListData, fetchNewsListData, fetchGameData } = useMmoService();
   const [loading, setLoading] = useState<boolean>(false);
-  const [comments, setComments] = useState<FormProps[]>([]);
+  const [comments, setComments] = useState<FormProps | null>(null);
+  const [renderComments, setRenderComments] = useState<StorageProps[]>([]);
 
   const [game, setGame] = useState<GameProps>();
   const [screenshots, setScreenshots] = useState<string[]>([]);
@@ -32,7 +39,7 @@ export const Game = () => {
   const { gameId } = useParams();
 
   const addComments = async (comment:FormProps) => {
-    setComments((prev) => [...prev, comment]);
+    setComments(comment);
   };
 
   const fetchGame = async (id:string) => {
@@ -47,8 +54,22 @@ export const Game = () => {
     (async () => {
       await fetchGame(`${gameId}`);
     })();
+    const idComments = commentsFromStorage.filter((element : StorageProps) => !!gameId && element.id === +gameId);
+    setRenderComments(idComments);
   }, []);
-  console.log(comments);
+  useEffect(() => {
+    if (comments && !!gameId) {
+      const commentToStorage :StorageProps = {
+        id: +gameId,
+        user: comments?.fullName ?? '',
+        comment: comments?.comment ?? '',
+        votes: 0,
+      };
+      setCommentsFromStorage([...commentsFromStorage, commentToStorage]);
+      setRenderComments([...renderComments, commentToStorage]);
+    }
+  }, [comments]);
+  console.log(renderComments);
   return (
     <Container maxWidth="xl">
 
@@ -69,6 +90,14 @@ export const Game = () => {
           <FormGame setComments={addComments} />
 
         </Grid>
+        {renderComments.length > 0 && (
+        <Grid item xs={12} md={12} alignItems="stretch">
+          <Card sx={{ p: 3, mb: 3 }}>
+            { renderComments.map((comment) => <Comments comment={comment} />) }
+
+          </Card>
+        </Grid>
+        )}
       </Grid>
     </Container>
   );

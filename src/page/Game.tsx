@@ -7,7 +7,7 @@
 /* eslint-disable react/function-component-definition */
 /* eslint-disable import/prefer-default-export */
 
-import { Container, Grid } from '@mui/material';
+import { Card, Container, Grid } from '@mui/material';
 import Carousel from 'component/Carousel';
 import ImageCard from 'component/ImageCard';
 import { SettingsContext } from 'context/SettingContext';
@@ -22,6 +22,7 @@ import { FormGame } from 'component/FormGame';
 import { FormProps } from 'type/form';
 import { StorageProps } from 'type/storage';
 import useStorage from 'hook/useStorage';
+import Comments from 'component/Comments';
 
 export const Game = () => {
   const StorageSchema: StorageProps[] = [];
@@ -65,9 +66,10 @@ export const Game = () => {
         votes: 0,
       };
       setCommentsFromStorage([...commentsFromStorage, commentToStorage]);
+      setRenderComments([...renderComments, commentToStorage]);
     }
   }, [comments]);
-  console.log(commentsFromStorage);
+  console.log(renderComments);
   return (
     <Container maxWidth="xl">
 
@@ -88,6 +90,14 @@ export const Game = () => {
           <FormGame setComments={addComments} />
 
         </Grid>
+        {renderComments.length > 0 && (
+        <Grid item xs={12} md={12} alignItems="stretch">
+          <Card sx={{ p: 3, mb: 3 }}>
+            { renderComments.map((comment) => <Comments comment={comment} />) }
+
+          </Card>
+        </Grid>
+        )}
       </Grid>
     </Container>
   );

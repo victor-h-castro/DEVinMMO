@@ -24,7 +24,7 @@ export const News = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [gameListRender, setGameListRender] = useState<GameListProps[]>();
   const [newsList, setNewsList] = useState<NewsListProps[]>();
-  const { state } = useContext(SettingsContext);
+  const { state, setState } = useContext(SettingsContext);
   function shuffleArr(array: any[]) {
     for (let i = array.length - 1; i > 0; i--) {
       const rand = Math.floor(Math.random() * (i + 1));
@@ -35,7 +35,6 @@ export const News = () => {
   const fetchNewsList = async () => {
     setLoading(true);
     const newsListData :NewsListProps[] = await fetchNewsListData();
-    console.log(newsListData);
     shuffleArr(newsListData);
     setNewsList(() => newsListData);
     setLoading(() => true);
@@ -45,6 +44,9 @@ export const News = () => {
     (async () => {
       await fetchNewsList();
     })();
+    return () => {
+      setState('');
+    };
   }, []);
 
   return (

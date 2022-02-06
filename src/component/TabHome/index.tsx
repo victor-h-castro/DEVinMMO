@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
-// @mui
+
 import { SyntheticEvent, useEffect, useState } from 'react';
 
 import {
@@ -9,7 +9,7 @@ import {
 import { TabContext, TabList } from '@mui/lab';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const SIMPLE_TAB = [
+const TABS = [
   {
     value: '1',
     label: 'Home',
@@ -49,7 +49,7 @@ export function TabHome() {
   return (
     <TabContext value={value}>
       <TabList indicatorColor="secondary" onChange={handleChange}>
-        {SIMPLE_TAB.map((tab) => (
+        {TABS.map((tab) => (
           <Tab
             key={tab.value}
             label={tab.label}

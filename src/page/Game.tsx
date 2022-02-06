@@ -112,7 +112,10 @@ export const Game = () => {
           </Grid>
           {renderComments.length > 0 && (
           <Grid item xs={12} md={12} alignItems="stretch">
-            <Card sx={{ p: 3, mb: 3 }}>
+            <Card sx={{
+              p: 3, mb: 3, boxShadow: '0 0 1px 0 #9e9e9e, 0 8px 16px -4px #9e9e9e', borderRadius: '16px',
+            }}
+            >
               { renderComments.map((comment) => <Comments addVote={handleUpVote} subVote={handleDownVote} comment={comment} />) }
 
             </Card>

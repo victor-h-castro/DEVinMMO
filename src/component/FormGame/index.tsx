@@ -47,7 +47,10 @@ export function FormGame({ setComments } : FormGameProps) {
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Grid item xs={12}>
-          <Card sx={{ p: 3, mb: 3 }}>
+          <Card sx={{
+            p: 3, mb: 3, borderRadius: '16px', boxShadow: '0 0 1px 0 #9e9e9e, 0 8px 16px -4px #9e9e9e',
+          }}
+          >
             <Stack spacing={3}>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 3, sm: 2 }}>
                 <TextField

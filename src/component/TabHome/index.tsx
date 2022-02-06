@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
 
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   Tab,
@@ -39,16 +39,16 @@ export function TabHome() {
     return '1';
   };
   const [value, setValue] = useState('');
-  const handleChange = (event: SyntheticEvent, newValue: string) => {
+  const handleChange = (newValue: string) => {
     setValue(newValue);
   };
   useEffect(() => {
-    const teste = path();
-    setValue(teste);
+    const routeValue = path();
+    setValue(routeValue);
   }, []);
   return (
     <TabContext value={value}>
-      <TabList indicatorColor="secondary" onChange={handleChange}>
+      <TabList indicatorColor="secondary" onChange={() => handleChange}>
         {TABS.map((tab) => (
           <Tab
             key={tab.value}

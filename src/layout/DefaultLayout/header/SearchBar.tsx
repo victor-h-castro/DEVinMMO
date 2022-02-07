@@ -16,11 +16,11 @@ const SearchbarStyled = styled('div')({
   height: 97,
   top: 0,
   left: 0,
-  zIndex: 9999,
+  zIndex: 9000,
   paddingLeft: 64,
-  boxShadow: '0 8px 16px 0 rgb(145 158 171 / 12%)',
+  boxShadow: '0 8px 16px 0 rgb(146 159 172 / 14%)',
   backgroundColor: 'rgba(255, 255, 255, 0.6)',
-  backdropFilter: 'blur(6px)',
+  backdropFilter: 'blur(8px)',
 });
 
 export default function Searchbar() {
@@ -33,22 +33,24 @@ export default function Searchbar() {
   const handleClose = () => {
     setIsOpen(false);
   };
+
   const { setState } = useContext(SettingsContext);
+
   return (
     <ClickAwayListener onClickAway={handleClose}>
-      <>
+      <div>
         <Slide direction="down" in={isOpen} mountOnEnter unmountOnExit>
           <SearchbarStyled>
             <Input
-              fullWidth
               placeholder="Search…"
+              fullWidth
               disableUnderline
               onChange={(e) => setState(e.target.value)}
               startAdornment={(
                 <InputAdornment position="start">
                   <Iconify
                     icon="eva:search-fill"
-                    sx={{ width: 32, height: 32 }}
+                    sx={{ width: 24, height: 24 }}
                   />
                 </InputAdornment>
               )}
@@ -58,10 +60,10 @@ export default function Searchbar() {
         </Slide>
         {!isOpen && (
           <ButtonAnimated onClick={handleOpen}>
-            <Iconify icon="eva:search-fill" width={32} height={32} />
+            <Iconify icon="eva:search-fill" width={24} height={24} />
           </ButtonAnimated>
         )}
-      </>
+      </div>
     </ClickAwayListener>
   );
 }

@@ -24,7 +24,7 @@ export default function Comments({ comment, addVote, subVote } : CommentsProps) 
           primary={comment.user}
           secondary={comment.comment}
         />
-        <Stack direction="column" sx={{ position: 'absolute', right: 0 }}>
+        <Stack direction="column" sx={{ position: 'absolute', right: 0, cursor: 'pointer' }}>
           <Iconify
             onClick={() => addVote(comment.position)}
             icon="ant-design:caret-up-outlined"
@@ -41,7 +41,7 @@ export default function Comments({ comment, addVote, subVote } : CommentsProps) 
           <Iconify
             onClick={() => subVote(comment.position)}
             icon="ant-design:caret-down-outlined"
-            sx={{ width: 24, height: 24 }}
+            sx={{ width: 24, height: 24, cursor: 'pointer' }}
           />
 
         </Stack>

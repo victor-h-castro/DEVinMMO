@@ -58,7 +58,7 @@ export default function NewsCard({
             {description}
           </TypographyLongText>
         </CardContent>
-        <CardActions sx={{ padding: 1 }}>
+        <CardActions sx={{ padding: 2 }}>
           <Link target="_blank" href={externalUrl} rel="noreferrer">
             View Link
           </Link>

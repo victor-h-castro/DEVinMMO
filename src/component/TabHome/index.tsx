@@ -21,13 +21,13 @@ const SIMPLE_TAB = [
     value: '2',
     label: 'News',
     disabled: false,
-    navigation: '/home/news',
+    navigation: '/news',
   },
   {
     value: '3',
     label: 'Random',
     disabled: false,
-    navigation: '/home/game/1',
+    navigation: '/game/1',
   },
 ];
 

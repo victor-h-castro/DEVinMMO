@@ -2,16 +2,15 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/jsx-props-no-spreading */
-// https://mui.com/pt/api/icon-button/ e https://mui.com/components/buttons/
-import { forwardRef, ReactNode } from 'react';
+import { forwardRef, ReactNode, useState } from 'react';
 import { Box, IconButton, IconButtonProps } from '@mui/material';
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 
 const ButtonAnimated = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ children, ...other }, ref) => (
+  ({ children, ...other }) => (
 
     <AnimatedWrappper>
-      <IconButton size="medium" ref={ref} {...other}>
+      <IconButton size="large" {...other}>
         {children}
       </IconButton>
     </AnimatedWrappper>

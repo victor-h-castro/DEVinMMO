@@ -4,7 +4,6 @@
 import { AppBar, Grid, Toolbar } from '@mui/material';
 import { TabHome } from 'component/TabHome';
 import ThemeSwitch from 'component/ThemeSwitch';
-import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Searchbar from './SearchBar';
 
@@ -16,14 +15,12 @@ min-height: 96px;
 `;
 
 export default function Header() {
-  const { pathname } = useLocation();
-
   return (
     <AppBarStyled>
       <ToolBarStyled>
         <Grid container justifyContent="flex-start" direction="row">
           <Grid item xs={2}>
-            { !(pathname.includes('/game')) && <Searchbar />}
+            <Searchbar />
           </Grid>
           <Grid item container alignItems="center" justifyContent="center" xs={8}>
 

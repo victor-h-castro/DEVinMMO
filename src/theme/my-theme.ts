@@ -6,8 +6,8 @@ const light: DefaultTheme = {
 
 };
 const dark: DefaultTheme = {
-  backgroundColor: 'black',
-
+  backgroundColor: '#121212',
+  color: 'grey',
 };
 
 export { light, dark };

@@ -11,6 +11,7 @@ export default function Router() {
       path: '/',
       element: <DefaultLayout />,
       children: [
+        { element: <Navigate to="/home" replace />, index: true },
         { path: '/home', element: <Home /> },
         { path: '/news', element: <News /> },
         { path: '/game/:gameId', element: <Game /> },

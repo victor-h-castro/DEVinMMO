@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
@@ -47,7 +48,7 @@ export const Home = () => {
     <Loading loading={loading}>
       <Grid direction="row" spacing={5} container px={2} sx={{ marginTop: 1 }}>
         <Grid container item spacing={5} xs={12}>
-          {gameList?.filter((element) => element.title.toLowerCase().includes(state))?.map(({
+          {gameList?.filter((element) => element.title.toLowerCase().includes(state.toLowerCase()))?.map(({
             id, title, thumbnail, short_description,
           }) => (
             <Grid item xs={12} md={6} lg={4}>

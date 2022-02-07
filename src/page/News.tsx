@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
 /* eslint-disable jsx-a11y/alt-text */
@@ -59,7 +60,7 @@ export const News = () => {
 
       <Grid direction="row" justifyContent="center" spacing={2} container px={2} sx={{ marginTop: 1 }}>
         <Grid justifyContent="center" container item spacing={2} xs={12} sm={10}>
-          {newsList?.filter((element) => element.title.toLowerCase().includes(state))?.map(({
+          {newsList?.filter((element) => element.title.toLowerCase().includes(state.toLowerCase()))?.map(({
             article_url, title, main_image, short_description,
           }) => (
             <Grid item xs={10} lg={7}>

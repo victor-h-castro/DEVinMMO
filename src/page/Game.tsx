@@ -9,7 +9,7 @@
 
 import { Card, Container, Grid } from '@mui/material';
 import Carousel from 'component/Carousel';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useMmoService } from 'service/useMmoService';
 import { GameProps } from 'type/game';
 import { useParams } from 'react-router-dom';
@@ -20,6 +20,7 @@ import { StorageProps } from 'type/storage';
 import useStorage from 'hook/useStorage';
 import Comments from 'component/Comments';
 import { Loading } from 'component/Loading';
+import { SettingsContext } from 'context/SettingContext';
 
 export const Game = () => {
   const StorageSchema: StorageProps[] = [];
@@ -31,6 +32,7 @@ export const Game = () => {
   const [game, setGame] = useState<GameProps>();
   const [screenshots, setScreenshots] = useState<string[]>([]);
   const { gameId } = useParams();
+  const { setState } = useContext(SettingsContext);
 
   const addComments = async (comment:FormProps) => {
     setComments(comment);
@@ -41,7 +43,6 @@ export const Game = () => {
       setLoading(true);
       const gameData :GameProps = await fetchGameData(id);
       setGame(() => gameData);
-
       setScreenshots(() => gameData.screenshots.map((element) => element.image));
       setLoading(() => false);
     } catch {
@@ -75,6 +76,9 @@ export const Game = () => {
     })();
     const idComments = commentsFromStorage.filter((element : StorageProps) => !!gameId && element.id === +gameId);
     setRenderComments(idComments);
+    return () => {
+      setState('');
+    };
   }, []);
 
   useEffect(() => {

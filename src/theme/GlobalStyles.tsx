@@ -2,11 +2,17 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const MyGlobalStyle = createGlobalStyle`
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box
+
 };
+h1, p, h2, h2, h3, h4, h5, h6, span { 
+  font-family: 'Montserrat' !important;
+}
+
 html {
   width: 100%;
   height: 100%;
@@ -16,7 +22,6 @@ html {
 body {
   width: 100%;
   height: 100%;
-  // background-image:url(https://blenderartists.org/uploads/default/original/4X/7/e/2/7e2d7bea4ac21388c4a96e1371f375c4ce00094b.jpg)
    background-color: ${(props) => props.theme.backgroundColor};
 };
 

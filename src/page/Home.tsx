@@ -29,6 +29,7 @@ export const Home = () => {
       setLoading(() => true);
       const gameListData :GameListProps[] = await fetchGameListData();
       setGameList(() => gameListData);
+      console.log(gameListData.map((element) => element.id));
       setLoading(() => false);
     } catch {
       setLoading(() => false);

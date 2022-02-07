@@ -1,35 +1,13 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
-// @mui
 import { SyntheticEvent, useEffect, useState } from 'react';
-
 import {
   styled,
   Tab,
 } from '@mui/material';
 import { TabContext, TabList } from '@mui/lab';
 import { useLocation, useNavigate } from 'react-router-dom';
-
-const SIMPLE_TAB = [
-  {
-    value: '1',
-    label: 'Home',
-    disabled: false,
-    navigation: '/home',
-  },
-  {
-    value: '2',
-    label: 'News',
-    disabled: false,
-    navigation: '/news',
-  },
-  {
-    value: '3',
-    label: 'Random',
-    disabled: false,
-    navigation: '/game/1',
-  },
-];
+import { gameIdMock } from 'util/gamesId';
 
 const TabStyled = styled(Tab)(({ theme }) => ({
 
@@ -49,6 +27,7 @@ export function TabHome() {
     return '1';
   };
   const [value, setValue] = useState('');
+
   const handleChange = (event: SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
@@ -56,18 +35,33 @@ export function TabHome() {
     const teste = path();
     setValue(teste);
   }, []);
+  const randomNavigation = () => {
+    const randomGenerator = Math.floor(Math.random() * gameIdMock.length);
+    navigate(`/game/${gameIdMock[randomGenerator]}`);
+  };
   return (
     <TabContext value={value}>
       <TabList indicatorColor="secondary" onChange={handleChange}>
-        {SIMPLE_TAB.map((tab) => (
-          <TabStyled
-            key={tab.value}
-            label={tab.label}
-            value={tab.value}
-            disabled={tab.disabled}
-            onClick={() => navigate(tab.navigation)}
-          />
-        ))}
+
+        <TabStyled
+          key="1"
+          label="Home"
+          value="1"
+          onClick={() => navigate('/home')}
+        />
+        <TabStyled
+          key="2"
+          label="News"
+          value="2"
+          onClick={() => navigate('/news')}
+        />
+
+        <TabStyled
+          key="3"
+          label="Random"
+          value="3"
+          onClick={() => randomNavigation()}
+        />
       </TabList>
     </TabContext>
   );

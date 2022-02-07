@@ -15,21 +15,20 @@ import { useContext, useEffect, useState } from 'react';
 import { useMmoService } from 'service/useMmoService';
 import { GameProps } from 'type/game';
 import { GameListProps } from 'type/gameList';
-import { NewsListProps } from 'type/newsList';
+import { shuffleArr } from 'util/shuffleArray';
 
 export const Home = () => {
   const { fetchGameListData } = useMmoService();
   const [loading, setLoading] = useState<boolean>(true);
   const [gameList, setGameList] = useState<GameListProps[]>();
-  const [game, setGame] = useState<GameProps>();
   const { state, setState } = useContext(SettingsContext);
 
   const fetchGameList = async () => {
     try {
       setLoading(() => true);
       const gameListData :GameListProps[] = await fetchGameListData();
+      shuffleArr(gameListData);
       setGameList(() => gameListData);
-      console.log(gameListData.map((element) => element.id));
       setLoading(() => false);
     } catch {
       setLoading(() => false);

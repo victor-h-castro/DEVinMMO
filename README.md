@@ -10,7 +10,7 @@
   <p align="center">
     An awesome Website for game topics related
     <br />
-    <a href="https://devinmmo-release.netlify.app/home">View Demo</a>
+    <a href="https://devinmmo-release.netlify.app/">View Demo</a>
     ·
     <a href="https://github.com/victor-h-castro/DEVinMMO/issues">Report Bug</a>
     ·

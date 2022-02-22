@@ -185,7 +185,7 @@ You can open a issue or a pull request for new features
 
 You can send me a message at linkedin or just follow me at github
 
-Project Link: [DevInMMMO(https://github.com/victor-h-castro/DEVinMMO)
+Project Link: [DevInMMMO](https://github.com/victor-h-castro/DEVinMMO)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

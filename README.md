@@ -148,7 +148,7 @@ Basically we have 3 subroutes :
     - [ ] Portuguese
     - [ ] Spanish
 
-See the [open issues](https://github.com/victor-h-castro/DEVinMMO/issues) for a full list of proposed features (and known issues, oooops(: ).
+See the [open issues](https://github.com/victor-h-castro/DEVinMMO/issues) for a full list of proposed features and known issues, oooops :)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

@@ -140,16 +140,15 @@ Basically we have 3 subroutes :
 <!-- ROADMAP -->
 ## Roadmap
 - [x] Mobile first
-- [x] improve website for non cellphone users
+- [x] Improve website for non mobile users
 - [x] Aplha release
 - [x] Deploy for community feedbacks
-- [x] Make a cool readm.me
+- [x] Make a cool readme
 - [ ] Multi-language Support
     - [ ] Portuguese
     - [ ] Spanish
-- [] M
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/victor-h-castro/DEVinMMO/issues) for a full list of proposed features (and known issues, oooops(: ).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -164,9 +163,9 @@ If you have a suggestion that would make this better, please fork the repo and c
 Don't forget to give the project a star! Thanks again!
 
 1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
+2. Create your Feature Branch (`git checkout -b feature/NAME`)
+3. Commit your Changes (`git commit -m 'Add some cool things'`)
+4. Push to the Branch (`git push origin feature/NAME`)
 5. Open a Pull Request
 
 <p align="right">(<a href="#top">back to top</a>)</p>

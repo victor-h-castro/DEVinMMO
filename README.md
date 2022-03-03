@@ -194,7 +194,7 @@ Project Link: [DevInMMMO](https://github.com/victor-h-castro/DEVinMMO)
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-I would like to thank all my classmates at devinhouse that helped me everytime i needed
+I would like to thank all my students and classmates that helped me everytime i needed
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
